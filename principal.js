@@ -11,26 +11,45 @@
 // .quantidade: todos os input[type=number] com a quantidade de dados a serem rolados
 // #quantidadeD{4,6,8,10,12,20}: um ID para cada input[type=number] com a quantidade
 var botao = document.getElementById('rolar');
-var result= document.getElementById('resultado');
-var dado =  document.getElementsByClassName('dado');
-var nDados=[4,6,8,10,12,20];
-var resultado=0;
-var resultDados=[];
+var result = document.getElementById('resultado');
+var dado = document.getElementsByClassName('dado');
+var values=[];
+values[0]=document.getElementById('quantidadeD4');
+values[1]=document.getElementById('quantidadeD6');
+values[2]=document.getElementById('quantidadeD8');
+values[3]=document.getElementById('quantidadeD10');
+values[4]=document.getElementById('quantidadeD12');
+values[5]=document.getElementById('quantidadeD20');
+var stringValues='';
+var nDados = [4, 6, 8, 10, 12, 20];
+var resultDados = [];
+var resultado = 0;
 var x = 0;
-botao.addEventListener('click',function(e){
- // alert(e.currentTarget.innerHTML);
-  //alert(e.currentTarget.innerHTML);
-  //result.innerHTML='t';
-  	for(var i = 0; i < 6 ;i++){
-    	alert(dado[i].input);
-    	/*for(var j = 0; j< dado[i].lastChild.value; j++){
-      	alert(e.currentTarget.innerHTML);
+result.innerHTML='';
+botao.addEventListener('click', function(e) {
+  for (var i = 0; i < 6; i++) {
+    for(var j = 0; j< values[i].value; j++){
       	resultDados[x]=Math.ceil(Math.random() * nDados[i]);
       	resultado=resultado + resultDados[x];
-      	x++;
-  }*/
-  //alert(e.currentTarget.innerHTML);
-  result.parentNode.className='';
-  result.innerHTML='teste';
+        if(stringValues == ''){
+        	stringValues =	stringValues + resultDados[x];
+          x++;
+        } else{
+        	stringValues=stringValues + '+' + resultDados[x];
+      		x++;
+        }
+
   }
+
+  }
+   if(stringValues!=''){
+     result.parentNode.className = '';
+     result.innerHTML =stringValues + ' = ' + resultado;
+     resultado = 0;
+     x = 0;
+     stringValues='';
+   }
+   else{
+     result.parentNode.className = 'oculto';
+   }
 });
